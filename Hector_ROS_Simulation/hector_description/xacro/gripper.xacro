@@ -3,9 +3,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <xacro:include filename="$(find hector_description)/xacro/arm_transmission.xacro"/>
 
-    <xacro:macro name="arm" params="name mirror mirror_dae  *origin">  
+    <xacro:macro name="gripper" params="name mirror mirror_dae  *origin">  
         
-        <joint name="${name}_twist_joint" type="revolute">
+        <joint name="${name}_gripper_twist_joint" type="revolute">
        
             <xacro:if value="${(mirror_dae == True)}">
             <origin rpy="0 0 0" xyz="0.0 0.047 0.1725"/>
@@ -16,7 +16,7 @@
             </xacro:if>          
           
             <parent link="trunk"/>
-            <child link="${name}_twist"/>
+            <child link="${name}_gripper_twist"/>
             <axis xyz="0 0 1"/>
             <dynamics damping="${damping}" friction="${friction}"/>
             <xacro:if value="${(mirror_dae == True)}">
@@ -26,7 +26,7 @@
                 <limit effort="${twist_torque_max}" velocity="${twist_velocity_max}" lower="${-twist_max}" upper="${-twist_min}"/>
             </xacro:if>  
         </joint>
-        <link name="${name}_twist">
+        <link name="${name}_gripper_twist">
             <visual>
             <origin rpy="0 ${-PI/2.0} 0" xyz="0 0 0"/>
             <geometry>
@@ -58,20 +58,36 @@
             </inertial> -->
         </link>
 
-        <joint name="${name}_shoulder_joint" type="revolute">
+        <transmission name="${name}_gripper_twist_tran">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}_gripper_twist_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${name}_gripper_twist_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>  
+
+
+
+
+
+
+        <joint name="${name}_gripper_shoulder_joint" type="revolute">
             <xacro:if value="${(mirror_dae == True)}">
             <origin rpy="0 0 0" xyz="0.0 0.0723 0.0"/>
             </xacro:if>
             <xacro:if value="${(mirror_dae == False)}">
             <origin rpy="0 0 0" xyz="0.0 -0.0723 0.0"/>
             </xacro:if>                
-            <parent link="${name}_twist"/>
-            <child link="${name}_shoulder"/>
+            <parent link="${name}_gripper_twist"/>
+            <child link="${name}_gripper_shoulder"/>
             <axis xyz="0 1 0"/>
-            <dynamics damping="1" friction="1"/>
+            <dynamics damping="$1" friction="$1"/>
             <limit effort="${shoulder_torque_max}" velocity="${shoulder_velocity_max}" lower="${shoulder_min}" upper="${shoulder_max}"/>
         </joint>
-        <link name="${name}_shoulder">
+        <link name="${name}_gripper_shoulder">
             <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             
@@ -104,16 +120,34 @@
                     izz="${shoulder_izz}"/>       
             </inertial>
         </link>
+        
+        <transmission name="${name}_gripper_shoulder_tran">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}_gripper_shoulder_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${name}_gripper_shoulder_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
 
-        <joint name="${name}_elbow_joint" type="revolute">
+
+
+
+
+
+
+
+        <joint name="${name}_gripper_elbow_joint" type="revolute">
             <origin rpy="0 -1.5 0" xyz="0.0 0.0 -0.205"/>
-            <parent link="${name}_shoulder"/>
-            <child link="${name}_elbow"/>
+            <parent link="${name}_gripper_shoulder"/>
+            <child link="${name}_gripper_elbow"/>
             <axis xyz="0 1 0"/>
             <dynamics damping="1" friction="1"/>
             <limit effort="${elbow_torque_max}" velocity="${elbow_velocity_max}" lower="${elbow_min}" upper="${elbow_max}"/>
         </joint>
-        <link name="${name}_elbow">
+        <link name="${name}_gripper_elbow">
             <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -136,7 +170,19 @@
                     izz="${elbow_izz}"/>       
             </inertial>
         </link>
-        <xacro:arm_transmission name="${name}"/>
+
+        <transmission name="${name}_gripper_elbow_tran">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${name}_gripper_elbow_joint">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${name}_gripper_twist_motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>  
+
+
 
 
         <!-- ros control plugin with mimic-->
@@ -161,7 +207,7 @@
         </xacro:macro>
 
 
-        <xacro:mimic_joint_plugin_gazebo  parent_joint="R_elbow_joint" mimic_joint="L_elbow_joint" 
+        <xacro:mimic_joint_plugin_gazebo  parent_joint="R_gripper_elbow_joint" mimic_joint="L_gripper_elbow_joint" 
                                             has_pid="false" multiplier="-1.0" max_effort="200" />
     
 
@@ -186,6 +232,8 @@
 
 
 
+
     </xacro:macro>
+
 </robot>
 

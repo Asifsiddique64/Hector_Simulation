@@ -97,15 +97,39 @@ void LowLevelController::updateCommand(LowlevelCmd* cmd){
         }
 
 
+
+
+        for (int j = 11; j < 13; j++){
+            cmd->motorCmd[j].tau = -0.03;
+            cmd->motorCmd[j].q = 0;
+            cmd->motorCmd[j].dq = 0;
+            cmd->motorCmd[j].Kp =0;
+            cmd->motorCmd[j].Kd = 0;
+            //std::cout << Side[i] << " " << limbName[j] <<" torque cmd  =  " << cmd->motorCmd[i*5+j].tau << std::endl;            
+        }
         
-        // for (int j = 7; j < 8; j++){
-        //     cmd->motorCmd[i*5+j].tau = -0.035;// commands[i].tau(j);
-        //     cmd->motorCmd[i*5+j].q = 0.01;// commands[i].qDes(j);
-        //     cmd->motorCmd[i*5+j].dq = 0.01;// commands[i].qdDes(j);
-        //     cmd->motorCmd[i*5+j].Kp = 0.01;//commands[i].kpJoint(j,j);
-        //     cmd->motorCmd[i*5+j].Kd = 0;//commands[i].kdJoint(j,j);
-        //     //std::cout << Side[i] << " " << limbName[j] <<" torque cmd  =  " << cmd->motorCmd[i*5+j].tau << std::endl;            
-        // }
+       
+        for (int j = 14; j < 16; j++){
+            cmd->motorCmd[j].tau = -0.03;
+            cmd->motorCmd[j].q = 0;
+            cmd->motorCmd[j].dq = 0;
+            cmd->motorCmd[j].Kp =0;
+            cmd->motorCmd[j].Kd = 0;
+            //std::cout << Side[i] << " " << limbName[j] <<" torque cmd  =  " << cmd->motorCmd[i*5+j].tau << std::endl;            
+        }
+        // cmd->motorCmd[7].tau = -0.035;// commands[i].tau(j);
+        // cmd->motorCmd[7].q = 0.01;// commands[i].qDes(j);
+        // cmd->motorCmd[7].dq = 0.01;// commands[i].qdDes(j);
+        // cmd->motorCmd[7].Kp = 0.01;//commands[i].kpJoint(j,j);
+        // cmd->motorCmd[7].Kd = 0;//commands[i].kdJoint(j,j);
+        
+        // cmd->motorCmd[12].tau = 0.035;// commands[i].tau(j);
+        // cmd->motorCmd[12].q = 0.01;// commands[i].qDes(j);
+        // cmd->motorCmd[12].dq = 0.01;// commands[i].qdDes(j);
+        // cmd->motorCmd[12].Kp = 0.01;//commands[i].kpJoint(j,j);
+        // cmd->motorCmd[12].Kd = 0;//commands[i].kdJoint(j,j);
+            //std::cout << Side[i] << " " << limbName[j] <<" torque cmd  =  " << cmd->motorCmd[i*5+j].tau << std::endl;            
+        
         //To access left  arm controllers use motorCmd 10 through 12
         //To access right arm controllers use motorCmd 13 through 15
 

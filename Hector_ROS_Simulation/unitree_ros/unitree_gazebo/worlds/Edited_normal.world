@@ -279,18 +279,18 @@
 <model name="carry_box">
     <static>false</static>
     <link name="link">
-    <pose>1.2 0 0.09 0 0 0</pose>
+    <pose>0.2 0 0.55 0 0 0</pose>
         <collision name="collision">
             <geometry>
                 <box>
-                    <size>0.24 0.25 0.25</size> <!-- Change the size as needed -->
+                    <size>0.20 0.22 0.20</size> <!-- Change the size as needed -->
                 </box>
             </geometry>
         </collision>
         <visual name="visual">
             <geometry>
                 <box>
-                    <size>0.24 0.25 0.25</size>
+                    <size>0.20 0.22 0.20</size>
                 </box>
             </geometry>
             <material>
