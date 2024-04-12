@@ -160,4 +160,55 @@
         
     </gazebo>
 
+<!--Asif edit-->
+
+ <!-- L arm -->
+    <gazebo reference="L_twist">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <kp  value="100000.0"/>
+        <kd  value="1000.0"/>
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="L_shoulder">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <kp  value="100000.0"/>
+        <kd  value="1000.0"/>
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="L_elbow">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <kp  value="100000.0"/>
+        <kd  value="1000.0"/>
+        <self_collide>0</self_collide>
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
+
+ <!-- R arm -->
+    <gazebo reference="R_twist">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <kp  value="100000.0"/>
+        <kd  value="1000.0"/>
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="R_shoulder">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <kp  value="100000.0"/>
+        <kd  value="1000.0"/>
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="R_elbow">
+        <mu1>1</mu1>
+        <mu2>1</mu2>
+        <kp  value="100000.0"/>
+        <kd  value="1000.0"/>
+        <self_collide>0</self_collide>
+        <material>Gazebo/Grey</material>
+    </gazebo>
+
 </robot>

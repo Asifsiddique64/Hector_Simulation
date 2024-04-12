@@ -107,7 +107,7 @@ void ConvexMPCLocomotion::run(ControlFSMData &data)
     }
     firstRun = false;
   }
-
+  //std::cout << vBody_des << "\n";
   contact_state = gait->getContactSubPhase();
 
   // foot placement

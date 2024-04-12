@@ -47,7 +47,7 @@
         <pose frame=''>-0.375 -0 0.075 0 -0 1.5708</pose>
         <geometry>
           <box>
-            <size>2 5 0.15</size>
+            <size>.25 .25 0.25</size>
           </box>
         </geometry>
         <material>
@@ -64,7 +64,7 @@
       <collision name='Stairs_1_Collision_0'>
         <geometry>
           <box>
-            <size>2 5 0.15</size>
+            <size>.25 .25 0.25</size>
           </box>
         </geometry>
         <pose frame=''>-0.375 -0 0.075 0 -0 1.5708</pose>

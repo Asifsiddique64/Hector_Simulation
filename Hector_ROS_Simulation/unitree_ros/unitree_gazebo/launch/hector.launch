@@ -1,5 +1,5 @@
 <launch>
-    <arg name="wname" default="normal"/>
+    <arg name="wname" default="Edited_normal"/>
     <arg name="rname" default="hector"/>
     <arg name="robot_path" value="(find $(arg rname)_description)"/>
     <arg name="dollar" value="$"/>
@@ -18,7 +18,7 @@
         <arg name="gui" value="$(arg gui)"/>
         <arg name="paused" value="$(arg paused)"/>
         <arg name="use_sim_time" value="$(arg use_sim_time)"/>
-        <arg name="headless" value="$(arg headless)"/>
+        <arg name="headless" value="$(arg headless)"/> 
     </include>
     
     <!-- Load the URDF into the ROS Parameter Server -->
@@ -40,6 +40,8 @@
           -J R_toe_joint 0
           -model hector_gazebo -param robot_description "/>
 
+
+
     <!-- Load joint controller configurations from YAML file to parameter server -->
     <rosparam file="$(arg dollar)$(arg robot_path)/config/robot_control.yaml" command="load"/>
 
@@ -57,6 +59,8 @@
           respawn="false" output="screen">
         <remap from="/joint_states" to="/hector_gazebo/joint_states"/>
     </node>
+
+    <!--<node name="rqt_reconfigure" pkg="rqt_gui" type="rqt_gui" />-->
 
 
     <!-- <node pkg="unitree_gazebo" type="servo" name="servo" required="true" output="screen"/> -->
